@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"strings"
 )
-
+// ProcessLines takes each line of input, converts it to ASCII art using the fontTable, and prints it.
+// It handles empty lines by printing a blank line.
 func ProcessLines(lines []string, fontTable map[int]string) {
 	var finaleSlice [][]string
 	for _, line := range lines {

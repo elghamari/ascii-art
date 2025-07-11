@@ -2,6 +2,8 @@ package functions
 
 import "strings"
 
+// fontTable is a map that associates ASCII character codes (int) with their ASCII art representation
+
 func BuildFontTable(data string) map[int]string {
 	fontTable := make(map[int]string)
 	chunks := strings.Split(data, "\n\n")
