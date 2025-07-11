@@ -2,7 +2,8 @@ package functions
 
 import "strings"
 
-// fontTable is a map that associates ASCII character codes (int) with their ASCII art representation
+// BuildFontTable constructs a map that associates ASCII character codes (int) with their ASCII art representation (string).
+// It splits the font file data into chunks, each representing a character, and maps them starting from ASCII code 32 (space).
 
 func BuildFontTable(data string) map[int]string {
 	fontTable := make(map[int]string)
