@@ -4,58 +4,29 @@ import (
 	"fmt"
 	"os"
 
-	"ascii-art/functions" 
+	"ascii-art/functions"
 )
 
-// printUsage: helper function to show how to use the program
-func printUsage() {
-	fmt.Println("Usage: go run . [STRING] [BANNER]")
-	fmt.Println("Example: go run . something standard")
-}
-
 func main() {
-	// Check if exactly two arguments are passed (excluding the program name)
-	if len(os.Args) != 3 {
-		printUsage()
+	// Check if exactly one argument is provided
+	if len(os.Args) != 2 {
+		fmt.Println("you must enter 1 argument")
 		return
 	}
-
-	// Extract input string and banner name from command-line arguments
 	input := os.Args[1]
-	bannerName := os.Args[2]
-
-	// Map of available banners and their corresponding file paths
-	banners := map[string]string{
-		"standard":   "banners/standard.txt",
-		"shadow":     "banners/shadow.txt",
-		"thinkertoy": "banners/thinkertoy.txt",
-	}
-
-	// Check if the banner name exists in the map
-	bannerFile, ok := banners[bannerName]
-	if !ok {
-		printUsage()
-		return
-	}
-
+	myfile := "standard.txt"
 	// Validate the input string if is printable and contains only valid characters
 	if !functions.IsValidInput(input) {
 		fmt.Println("Error: input contains invalid characters")
 		return
 	}
 
-	// Split the input into lines based on "\n"
-	lines := functions.ParseInput(input)
-
-	// Read the banner file content
-	data, err := os.ReadFile(bannerFile)
+	lines := functions.ParseInput(input) // Split the input into lines based on "\n"
+	data, err := os.ReadFile(myfile) // Read the font file
 	if err != nil {
-		fmt.Println("Error reading banner file", err)
+		fmt.Println("your fille have an error", err)
 		return
 	}
-
-	
-	fontTable := functions.BuildFontTable(string(data))  // Build the font table from file data
-
+	fontTable := functions.BuildFontTable(string(data)) // Build the font table from file data
 	functions.ProcessLines(lines, fontTable) // Convert and print ASCII art for each line
 }
